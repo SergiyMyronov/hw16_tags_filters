@@ -7,4 +7,4 @@ before_script:
   - python manage.py migrate
 script:
   - flake8 .
-  - python manage.py test classwork
+  - python manage.py test tag_filter
