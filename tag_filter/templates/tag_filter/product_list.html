@@ -1,0 +1,37 @@
+{% extends "./base.html" %}
+{% load custom_tag_filter %}
+
+{% block title %}Products{% endblock %}
+
+{% block content %}
+    <h1>Products</h1>
+    <h2>{% random_product %}</h2>
+    <ul>
+    {% for prod in object_list %}
+        <li>
+            <a href="{{ prod.id }}"> {{ prod.name|upper }} </a> Price: {{ prod.price|r_underline:9 }} Weight: {{ prod.weight|r_underline:10 }} Supplier: {{ prod.supplier }} Description: {{ prod.description|ban_words_with_char_combination }}
+        </li>
+    {% empty %}
+        <li>No products yet.</li>
+    {% endfor %}
+    </ul>
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+    <b>__________________________</b>
+    <h5>(   <a href="/tag_filter/prod/new">+ add new product +</a>   )</h5>
+{% endblock %}

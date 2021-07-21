@@ -1,0 +1,46 @@
+{% extends "./base.html" %}
+{% load custom_tag_filter %}
+
+{% block title %}Customers{% endblock %}
+
+{% block content %}
+    <h1>Customers</h1>
+    <ul>
+    {% for cust in object_list %}
+        <li>
+            <a href="{{ cust.id }}"> {{ cust.name }} </a> City: {{ cust.city }} |   Count of Products: {{ cust.cnt }}
+        </li>
+        {% for prod in cust.products.all %}
+            <p>
+                {{ prod.name }}  Price: {{ prod.price }} Weight: {{ prod.weight }} Description: {{ prod.description|ban_words_with_char_combination|upper }}
+            </p>
+        {% empty %}
+            <p>Customer does not have any product</p>
+        {% endfor %}
+        <p>
+            ---------------------------------------------
+        </p>
+    {% empty %}
+        <li>No customers yet.</li>
+    {% endfor %}
+    </ul>
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+    <b>__________________________</b>
+    <h5>(   <a href="/tag_filter/cust/new">+ add new customer +</a>   )</h5>
+{% endblock %}

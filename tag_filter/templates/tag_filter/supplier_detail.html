@@ -1,0 +1,30 @@
+{% extends "./base.html" %}
+
+{% block title %}Supplier Detail{% endblock %}
+
+{% block content %}
+    <h1>{{ object.name }}</h1>
+    <table>
+        <tr>
+            <td><b>Rating:</b> {{ object.rating }}</td>
+        </tr>
+        <tr>
+            <td><b>City:</b> {{ object.city }}</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="divider"><hr/></td>
+        </tr>
+        <tr>
+            <td><a href="edit/{{ object.id }}"> (edit supplier) </a></td>
+        </tr>
+        <tr>
+            <td><a href="delete/{{ object.id }}"> (delete supplier) </a></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="divider"><hr/></td>
+        </tr>
+        <tr>
+            <td><a href="{% url 'supplier_list' %}"> << Back to the list of suppliers >> </a></td>
+        </tr>
+    </table>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "./base.html" %}
+
+{% block title %}Product Detail{% endblock %}
+
+{% block content %}
+    <h1>{{ object.name }}</h1>
+    <table>
+        <tr>
+            <td><b>Code:</b> {{ object.code }}</td>
+        </tr>
+        <tr>
+            <td><b>Price:</b> {{ object.price }}</td>
+        </tr>
+        <tr>
+            <td><b>Weight:</b> {{ object.weight }}</td>
+        </tr>
+        <tr>
+            <td><b>Supplier:</b> {{ object.supplier }}</td>
+        </tr>
+        <tr>
+            <td><b>Description:</b> {{ object.description }}</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="divider"><hr/></td>
+        </tr>
+        <tr>
+            <td><a href="edit/{{ object.id }}"> (edit product) </a></td>
+        </tr>
+        <tr>
+            <td><a href="delete/{{ object.id }}"> (delete product) </a></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="divider"><hr/></td>
+        </tr>
+        <tr>
+            <td><a href="{% url 'product_list' %}"> << Back to the list of products >> </a></td>
+        </tr>
+    </table>
+{% endblock %}
